@@ -16,25 +16,26 @@ Vue.createApp({
         async fetchData() {
             const response = await fetch("https://restcountries.com/v2/all");
             this.countries = await response.json();
-            console.log(this.countries);
         }
+
     },
     computed: {
         searchCountry() {
             if (this.textInput) {
-                let countrySearched = this.countries.filter((x) => x.name.includes(this.textInput));
+                let countrySearched = this.countries.filter((x) => x.name.toLowerCase().includes(this.textInput.toLowerCase()));
+                if (this.regionCountryFilter) {
+                    return countrySearched.filter((x) => x.region.includes(this.regionCountryFilter));
+                }
                 return countrySearched;
             }
 
             if (this.regionCountryFilter) {
                 let IwantaRegion = this.countries.filter((x) => x.region.includes(this.regionCountryFilter));
-                return IwantaRegion;
-            }
+                 return IwantaRegion;
+                 
+                }     
 
-            else if (this.textInput && this.regionCountryFilter) {
-                return this.countries.filter((x) => x.region.includes(this.regionCountryFilter && this.textInput))
-
-            }
+           
             return this.countries
         }
     },
@@ -42,3 +43,4 @@ Vue.createApp({
 
 }).mount('#app')
 
+// :class="[isActive ? activeClass : '', errorClass]"
