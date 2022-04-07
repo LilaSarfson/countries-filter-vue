@@ -31,8 +31,11 @@ Vue.createApp({
                 return IwantaRegion;
             }
 
-            else if (this.textInput && this.regionCountryFilter)
-                return this.countries
+            else if (this.textInput && this.regionCountryFilter) {
+                return this.countries.filter((x) => x.region.includes(this.regionCountryFilter && this.textInput))
+
+            }
+            return this.countries
         }
     },
 
