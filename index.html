@@ -23,28 +23,29 @@
       <section class="search-filter-container">
         <div class="search-field">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input class="search-input" type="text" placeholder="Search for a country..." />
+          <input v-model="textInput" class="search-input" type="text" placeholder="Search for a country..." />
         </div>
 
-        <select name="regions" id="regions" aria-label="regions">
+        <select v-model="regionCountryFilter" name="regions" id="regions" aria-label="regions">
           <option value="">Filter by Region</option>
-          <option value="all">All</option>
-          <option value="africa">Africa</option>
-          <option value="americas">America</option>
-          <option value="asia">Asia</option>
-          <option value="europe">Europe</option>
-          <option value="oceania">Oceania</option>
+          <option value="All">All</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">America</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
         </select>
       </section>
-
+      <!-- Utilizar adecuadamente v-for para cargar todos los paises desde la variable de estado countries Corregir a las 11:45 -->
       <div class="cards">
-        <div class="card card-nombreDelPais"> <!-- Pista pasa usar el v-for-->
-          <img class="flag" src="" alt="nombreDelPais flag" />
+        <div v-for="paises in searchCountry" class="card card-nombreDelPais">
+          <!-- Pista pasa usar el v-for-->
+          <img class="flag" :src="paises.flag" alt="nombreDelPais flag" />
           <div class="content">
-            <h3 class="name">NOMBRE</h3>
-            <div><span class="country-info">Population: </span><span class="population">NÚMERO DE HABITANTES</span>
+            <h3 class="name">{{paises.name}}</h3>
+            <div><span class="country-info">Population:</span><span class="population">{{paises.population}}</span>
             </div>
-            <div><span class="country-info">Region: </span><span class="region">EUROPA? ASIA?</span></div>
+            <div><span class="country-info">Region: </span><span class="region">{{paises.region}}</span></div>
 
             <div><span class="country-info">Capital: </span><span class="capital">Madrid</span></div>
           </div>
