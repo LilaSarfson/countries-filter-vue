@@ -11,21 +11,24 @@
 </head>
 
 <body>
-  <header>
-    <a href="#" class="logo">Where in the world?</a>
-    <button class="btn-toggle">
-      <i class="fa-solid fa-moon"></i><span>Dark Mode</span>
-    </button>
-  </header>
-
   <main id="app">
-    <div :class="main-container, [ThemeWhiteActive? light : '']">
+    <header>
+      <a href="#" class="logo">Where in the world?</a>
+      <button class="btn-toggle">
+        <i class="fa-solid fa-moon"></i><span>Dark Mode</span>
+      </button>
+    </header>
+    <div class="main-container">
       <section class="search-filter-container">
         <div class="search-field">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input v-model="textInput" class="search-input" type="text" placeholder="Search for a country..." />
         </div>
-
+        <select v-model="HigherOrLower" name="populationOrder" id="populationOrder">
+          <option value="">Filter by population</option>
+          <option value="Higher">Higher population</option>
+          <option value="Lower">Lower population</option>
+        </select>
         <select v-model="regionCountryFilter" name="regions" id="regions" aria-label="regions">
           <option value="">Filter by Region</option>
           <option value="">All</option>
@@ -35,6 +38,11 @@
           <option value="Europe">Europe</option>
           <option value="Oceania">Oceania</option>
         </select>
+        <div v-if="alertLowPopulation" class="card">
+          <div class="content">
+            All displayed countries have less than 10.000.000 habitants.
+          </div>
+        </div>
       </section>
       <!-- Utilizar adecuadamente v-for para cargar todos los paises desde la variable de estado countries Corregir a las 11:45 -->
       <div class="cards">
